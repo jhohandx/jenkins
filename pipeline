@@ -104,28 +104,23 @@ pipeline {
             // env.azregions = regions['providers']['azure']['region']
             // echo {awsregions}
             // echo {azregions}
+            List provider = []
+            List region = []
             List groups = []
             List host = []
             Yaml parser = new Yaml()
             def example = parser.load(("/var/jenkins_home/workspace/github_main/config.yaml" as File).text)
 
-            for(anf in example.keySet()){
-                // print(anf)
-                groups.add(anf)
-            } 
-            // println(groups)
-
             for(inf in example.providers.keySet()){
-                print(inf)
-                groups.add(inf)  
+                provider.add(inf)  
             }
 
             for(inf in example.providers.aws.region.keySet()){
-                print(inf)
-                groups.add(inf)  
+                region.add(inf)  
             }
 
-            println(groups)
+            println(provider)
+            println(region)
 	        }
         }
       }
