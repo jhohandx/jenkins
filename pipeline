@@ -11,13 +11,13 @@ properties([
                 $class: 'GroovyScript', 
                 fallbackScript: [
                     classpath: [], 
-                    sandbox: false, 
+                    sandbox: true, 
                     script: 
                         'return[\'Could not get Environment\']'
                 ], 
                 script: [
                     classpath: [], 
-                    sandbox: false, 
+                    sandbox: true, 
                     script: 
                         'return["DEV","QA","PRD"]'
                 ]
@@ -35,13 +35,13 @@ properties([
                 $class: 'GroovyScript', 
                 fallbackScript: [
                     classpath: [], 
-                    sandbox: false, 
+                    sandbox: true, 
                     script: 
                         'return[\'Could not get Environment from Env Param\']'
                 ], 
                 script: [
                     classpath: [], 
-                    sandbox: false, 
+                    sandbox: true, 
                     script: 
                         ''' if (Env.equals("DEV")){
                                 return["DEV1","DEV2","DEV3"]
