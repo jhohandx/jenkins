@@ -1,5 +1,5 @@
 providers:   
-    "aws":   
+    aws:   
      -region: 
         - eu-north-1
             -az
@@ -38,7 +38,7 @@ providers:
         - us-east-2    
         - us-west-1    
         - us-west-2
-    "azure":   
+    azure:   
      -region: 
         - eu-north-1
             -az
