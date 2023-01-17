@@ -82,7 +82,6 @@ pipeline {
         }
       }
       stage("Read Manifest Config") {
-         steps {
           node {
             def regions = readYaml file: "config.yaml"
             echo "regions: " + regions
@@ -92,7 +91,6 @@ pipeline {
             echo {awsregions}
             echo {azregions}
 	        }
-        }
       }
   }
 }
