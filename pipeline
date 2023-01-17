@@ -87,7 +87,7 @@ pipeline {
       }
       stage("Read Manifest Config") {
          steps {
-          node {
+          script {
             def regions = readYaml file: "config.yaml"
             echo "regions: " + regions
             
