@@ -1,79 +1,79 @@
 providers:   
     aws:   
-     -region: 
-        - eu-north-1
-            -az
-                - a
-                - b
-        - ap-south-1
-            -az
-                - a
-                - b
-                - c
-        - eu-west-3
-            -az
-                - a
-                - b
-                - c
-        - eu-west-2
-            -az 
-                -none
-        - eu-west-1
-            -az 
-                -none
-        - ap-northeast-2 
-            -az 
-                -none
-        - me-south-1
-            -az 
-                -none
-        - ap-northeast-1       
-        - sa-east-1
-        - ca-central-1
-        - ap-east-1
-        - ap-southeast-1                          
-        - ap-southeast-2
-        - eu-central-1                               
-        - us-east-1       
-        - us-east-2    
-        - us-west-1    
-        - us-west-2
+     region: 
+        eu-north-1:
+            az:
+              - a
+              - b
+        ap-south-1:
+            az:
+              - a
+              - b
+              - c
+        eu-west-3:
+            az:
+              - a
+              - b
+              - c
+        eu-west-2:
+            az:
+              - none
+        eu-west-1:
+            az:
+              - none
+        ap-northeast-2: 
+            az:
+              - none
+        me-south-1:
+            az:
+              - none
+        ap-northeast-1:       
+        sa-east-1:
+        ca-central-1:
+        ap-east-1:
+        ap-southeast-1:                          
+        ap-southeast-2:
+        eu-central-1:                            
+        us-east-1:       
+        us-east-2:   
+        us-west-1:    
+        us-west-2:
     azure:   
-     -region: 
-        - eu-north-1
-            -az
-                - a
-                - b
-        - ap-south-1
-            -az
-                - a
-                - b
-                - c
-        - eu-west-3
-            -az
-                - a
-                - b
-                - c
-        - eu-west-2
-            -az 
-                -none
-        - eu-west-1
-            -az 
-                -none
-        - ap-northeast-2 
-            -az 
-                -none
-        - me-south-1
-            -az 
-                -none
-        - ap-northeast-1       
-        - sa-east-1
-        - ca-central-1
-        - ap-east-1
-        - ap-southeast-1                          
-        - ap-southeast-2
-        - eu-central-1                               
-        - us-east-1       
-        - us-east-2    
-        - us-west-1    
-        - us-west-2
+     region: 
+        eu-north-1:
+            az:
+              - a
+              - b
+        ap-south-1:
+            az:
+              - a
+              - b
+              - c
+        eu-west-3:
+            az:
+              - a
+              - b
+              - c
+        eu-west-2:
+            az:
+            - none
+        eu-west-1:
+            az:
+            - none
+        ap-northeast-2 :
+            az:
+            - none
+        me-south-1:
+            az:
+            - none
+        ap-northeast-1:       
+        sa-east-1:
+        ca-central-1:
+        ap-east-1:
+        ap-southeast-1:                          
+        ap-southeast-2:
+        eu-central-1:                               
+        us-east-1:       
+        us-east-2:    
+        us-west-1:    
+        us-west-2:
