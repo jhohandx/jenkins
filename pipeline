@@ -91,13 +91,13 @@ pipeline {
       stage("Read Manifest Config") {
          steps {
           script {
-            def regions = readYaml file: "config.yaml"
+            def regions = readFile file: "config.yaml"
             echo "regions: " + regions
             
-            env.awsregions = regions['providers']['aws']['region']
-            env.azregions = regions['providers']['azure']['region']
-            echo {awsregions}
-            echo {azregions}
+            // env.awsregions = regions['providers']['aws']['region']
+            // env.azregions = regions['providers']['azure']['region']
+            // echo {awsregions}
+            // echo {azregions}
 	        }
         }
       }
