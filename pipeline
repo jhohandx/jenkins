@@ -80,8 +80,10 @@ pipeline {
             echo "Crossed param validation"
           }
         }
-        stage("Read Manifest Config") {
-          node {
+      }
+      stage("Read Manifest Config") {
+         steps {
+          script {
             def regions = readYaml file: "config.yaml"
             echo "regions: " + regions
             
@@ -90,7 +92,7 @@ pipeline {
             echo {awsregions}
             echo {azregions}
 	        }
-      }
+        }
       }
   }
 }
