@@ -124,5 +124,148 @@ pipeline {
 	        }
         }
       }
-  }
+    stage('Input Cloud Specific Parameters') {
+        def cloudParams = input(
+            message: 'Please fill out the fields and continue.',
+            parameters: [
+                string(name: 'provider', description: 'Required: provider', defaultValue: '', trim: true),
+                string(name: 'region', description: 'Required: region', defaultValue: '', trim: true),
+                [$class: 'ChoiceParameter',
+                    choiceType: 'PT_RADIO',
+                    description: 'Required: Primary Region',
+                    filterLength: 1,
+                    filterable: false,
+                    name: 'primaryRegion',
+                    script: [
+                        $class: 'GroovyScript',
+                        fallbackScript: [
+                            classpath: [],
+                            sandbox: true,
+                            script: 'return["Could not get Primary Region"]'
+                        ],
+                        script: [
+                            classpath: [],
+                            sandbox: true,
+                            script: """
+                                return ["${provider.join('","')}"]
+                            """
+                        ]
+                    ]
+                ],
+                [$class: 'ChoiceParameter',
+                    choiceType: 'PT_RADIO',
+                    description: 'Optional: Secondary Region',
+                    filterLength: 1,
+                    filterable: false,
+                    name: 'secondaryRegion',
+                    script: [
+                        $class: 'GroovyScript',
+                        fallbackScript: [
+                            classpath: [],
+                            sandbox: true,
+                            script: 'return["Could not get Secondary Region"]'
+                        ],
+                        script: [
+                            classpath: [],
+                            sandbox: true,
+                            script: """
+                                return ["none:selected","${region.join('","')}"]
+                            """
+                        ]
+                    ]
+                ]
+            ]
+        )      
+   } 
 }
+
+
+
+        stage('Input Cloud Specific Parameters') {
+            def cloudParams = input(
+                message: 'Please fill out the fields and continue.',
+                parameters: [
+                    string(name: 'provider', description: 'Required: provider', defaultValue: '', trim: true),
+                    string(name: 'region', description: 'Required: region', defaultValue: '', trim: true),
+                    [$class: 'ChoiceParameter',
+                        choiceType: 'PT_RADIO',
+                        description: 'Required: Primary Region',
+                        filterLength: 1,
+                        filterable: false,
+                        name: 'primaryRegion',
+                        script: [
+                            $class: 'GroovyScript',
+                            fallbackScript: [
+                                classpath: [],
+                                sandbox: true,
+                                script: 'return["Could not get Primary Region"]'
+                            ],
+                            script: [
+                                classpath: [],
+                                sandbox: true,
+                                script: """
+                                    return ["${provider.join('","')}"]
+                                """
+                            ]
+                        ]
+                    ],
+                    [$class: 'ChoiceParameter',
+                        choiceType: 'PT_RADIO',
+                        description: 'Optional: Secondary Region',
+                        filterLength: 1,
+                        filterable: false,
+                        name: 'secondaryRegion',
+                        script: [
+                            $class: 'GroovyScript',
+                            fallbackScript: [
+                                classpath: [],
+                                sandbox: true,
+                                script: 'return["Could not get Secondary Region"]'
+                            ],
+                            script: [
+                                classpath: [],
+                                sandbox: true,
+                                script: """
+                                    return ["none:selected","${region.join('","')}"]
+                                """
+                            ]
+                        ]
+                    ]
+                    ]
+                    // [$class: 'DynamicReferenceParameter',
+                    //     choiceType: 'ET_FORMATTED_HTML',
+                    //     description: 'Required: Zones of the subnets.',
+                    //     name: 'subnetZones',
+                    //     referencedParameters: 'subnetNum',
+                    //     omitValueField: true,
+                    //     script: [
+                    //         $class: 'GroovyScript',
+                    //         fallbackScript: [
+                    //             classpath: [],
+                    //             sandbox: true,
+                    //             script: "return 'Could not get number of subnets'"
+                    //         ],
+                    //         script: [
+                    //             classpath: [],
+                    //             sandbox: true,
+                    //             script: """
+                    //                 subnets = Integer.parseInt(subnetNum)
+                    //                 if (subnets > 0) {
+                    //                     html = ""
+                    //                     for (int i = 0; i < subnets; i++) {
+                    //                         html += "Subnet \${i+1}: <input class='setting-input' type='text' name='value' size='100'  style='width:100%' maxlength='64' value=''/>"
+                    //                     }
+                    //                 } else {
+                    //                     html = ""
+                    //                 }
+                    //                 return html
+                    //                 """
+                    //         ]
+                    //     ]
+                    // ]
+                ]
+            )
+            cloudParams.each {
+                ky, vl -> println("'${ky}': '${vl}'")
+            }
+        }
