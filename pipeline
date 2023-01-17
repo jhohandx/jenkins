@@ -1,5 +1,6 @@
 properties([
     parameters([
+        buildDiscarder(logRotator(daysToKeepStr: '3', numToKeepStr: '3')),
         [$class: 'ChoiceParameter', 
             choiceType: 'PT_SINGLE_SELECT', 
             description: 'Select the Env Name from the Dropdown List', 
@@ -58,6 +59,9 @@ properties([
         ]
     ])
 ])
+
+
+buildDiscarder(logRotator(daysToKeepStr: '3', numToKeepStr: '3')
 
 import org.yaml.snakeyaml.Yaml
 import org.yaml.snakeyaml.DumperOptions
