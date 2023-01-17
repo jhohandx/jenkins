@@ -59,6 +59,8 @@ properties([
     ])
 ])
 
+import org.yaml.snakeyaml.Yaml
+
 pipeline {
     options {
     buildDiscarder(logRotator(numToKeepStr: '3', artifactNumToKeepStr: '3'))
@@ -87,9 +89,6 @@ pipeline {
       stage("Read Manifest Config") {
          steps {
           script {
-            import org.yaml.snakeyaml.Yaml
-            import org.yaml.snakeyaml.DumperOptions
-            import static org.yaml.snakeyaml.DumperOptions.FlowStyle.BLOCK
             def regions = readFile file: "config.yaml"
             echo "regions: " + regions
             
@@ -97,6 +96,23 @@ pipeline {
             // env.azregions = regions['providers']['azure']['region']
             // echo {awsregions}
             // echo {azregions}
+            List groups = []
+            List host = []
+            Yaml parser = new Yaml()
+            def example = parser.load(("/Users/jhohandx/Documents/work/repos/personal/config.yaml" as File).text)
+
+            for(anf in example.keySet()){
+                // print(anf)
+                groups.add(anf)
+            } 
+            // println(groups)
+
+            for(inf in example.all.children.keySet()){
+                print(inf)
+                groups.add(inf)  
+            }
+
+            println(groups)
 	        }
         }
       }
