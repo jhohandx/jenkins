@@ -87,7 +87,6 @@ pipeline {
         }
       }
       stage("Read Manifest Config") {
-        steps
          steps {
           script {
             def regions = readFile file: "config.yaml"
