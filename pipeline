@@ -1,6 +1,5 @@
 properties([
     parameters([
-        buildDiscarder(logRotator(daysToKeepStr: '3', numToKeepStr: '3')),
         [$class: 'ChoiceParameter', 
             choiceType: 'PT_SINGLE_SELECT', 
             description: 'Select the Env Name from the Dropdown List', 
@@ -65,6 +64,9 @@ import org.yaml.snakeyaml.DumperOptions
 import static org.yaml.snakeyaml.DumperOptions.FlowStyle.BLOCK
 
 pipeline {
+    options {
+    buildDiscarder(logRotator(numToKeepStr: '30', artifactNumToKeepStr: '30'))
+  }
   environment {
          vari = ""
   }
