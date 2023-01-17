@@ -23,44 +23,6 @@ properties([
                 ]
             ]
         ],
-        [$class: 'ChoiceParameter', 
-            choiceType: 'PT_SINGLE_SELECT', 
-            description: 'Select the Provider Name from the Dropdown List', 
-            filterLength: 1, 
-            filterable: false, 
-            name: 'Provider', 
-            randomName: 'choice-parameter-5631314439613978', 
-            script: [
-                $class: 'GroovyScript', 
-                fallbackScript: [
-                    classpath: [], 
-                    sandbox: true, 
-                    script: 
-                        'return[\'Could not get Provider\']'
-                ], 
-                script: [
-                    classpath: [], 
-                    sandbox: true, 
-                    script: 
-                        ' List provider = []
-                          List region = []
-                          Yaml parser = new Yaml()
-                          def example = parser.load(("/var/jenkins_home/workspace/github_main/config.yaml" as File).text)
-
-                          for(inf in example.providers.keySet()){
-                              provider.add(inf)  
-                          }
-
-                          for(inf in example.providers.aws.region.keySet()){
-                              region.add(inf)  
-                          }
-
-                          println(provider)
-                          println(region)
-                        '
-                ]
-            ]
-        ],
         [$class: 'CascadeChoiceParameter', 
             choiceType: 'PT_SINGLE_SELECT', 
             description: 'Select the Server from the Dropdown List', 
@@ -152,6 +114,10 @@ pipeline {
             }
 
             for(inf in example.providers.aws.region.keySet()){
+                region.add(inf)  
+            }
+
+            for(inf in example.providers.aws.region.ap-south-1.keySet()){
                 region.add(inf)  
             }
 
