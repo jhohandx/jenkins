@@ -65,7 +65,7 @@ import static org.yaml.snakeyaml.DumperOptions.FlowStyle.BLOCK
 
 pipeline {
     options {
-    buildDiscarder(logRotator(numToKeepStr: '30', artifactNumToKeepStr: '30'))
+    buildDiscarder(logRotator(numToKeepStr: '3', artifactNumToKeepStr: '3'))
   }
   environment {
          vari = ""
