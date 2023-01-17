@@ -59,6 +59,11 @@ properties([
     ])
 ])
 
+@Grab('org.yaml:snakeyaml:1.17')
+import org.yaml.snakeyaml.Yaml
+import org.yaml.snakeyaml.DumperOptions
+import static org.yaml.snakeyaml.DumperOptions.FlowStyle.BLOCK
+
 pipeline {
   environment {
          vari = ""
@@ -83,8 +88,8 @@ pipeline {
       }
       stage("Read Manifest Config") {
          steps {
-          script {
-            def regions = readFile file: "config.yaml"
+          node {
+            def regions = readYaml file: "config.yaml"
             echo "regions: " + regions
             
             env.awsregions = regions['providers']['aws']['region']
