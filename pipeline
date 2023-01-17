@@ -115,7 +115,7 @@ pipeline {
             } 
             // println(groups)
 
-            for(inf in example.providers.aws.region.keySet()){
+            for(inf in example.providers.keySet()){
                 print(inf)
                 groups.add(inf)  
             }
