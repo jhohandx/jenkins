@@ -1,4 +1,4 @@
-properties([
+    properties([
     parameters([
         [$class: 'ChoiceParameter', 
             choiceType: 'PT_SINGLE_SELECT', 
@@ -45,7 +45,7 @@ properties([
                     script: 
                         ''' if (Env.equals("DEV")){
                                 return["DEV1","DEV2","DEV3"]
-                            }
+                        }
                             else if(Env.equals("QA")){
                                 return["QA1","QA2","QA3"]
                             }
@@ -66,7 +66,7 @@ pipeline {
     buildDiscarder(logRotator(numToKeepStr: '1', artifactNumToKeepStr: '1'))
     }
   environment {
-    vari = ""
+         vari = ""
   }
   agent any
   stages {
@@ -99,7 +99,7 @@ pipeline {
                 script {
                     // def regions = readFile file: "config.yaml"
                     // echo "regions: " + regions
-                    
+            
                     // env.awsregions = regions['providers']['aws']['region']
                     // env.azregions = regions['providers']['azure']['region']
                     // echo {awsregions}
@@ -108,13 +108,13 @@ pipeline {
                     List region = []
                     List az = []
                     Yaml parser = new Yaml()
-                    def example = parser.load(("/var/jenkins_home/workspace/github_main/config.yaml" as File).text)
+                    def yaml = parser.load(("/var/jenkins_home/workspace/github_main/config.yaml" as File).text)
 
-                    for(inf in example.providers.keySet()){
+                    for(inf in yaml.providers.keySet()){
                         provider.add(inf)  
                     }
 
-                    for(inf in example.providers.aws.region.keySet()){
+                    for(inf in yaml.providers.aws.region.keySet()){
                         region.add(inf)  
                     }
 
@@ -124,64 +124,5 @@ pipeline {
                 }
             }
         }
-        stage('Input Cloud Specific Parameters') {
-            def cloudParams = input(
-                message: 'Please fill out the fields and continue.',
-                parameters: [
-                    string(name: 'provider', description: 'Required: provider', defaultValue: '', trim: true),
-                    string(name: 'region', description: 'Required: region', defaultValue: '', trim: true),
-                    [$class: 'ChoiceParameter',
-                        choiceType: 'PT_RADIO',
-                        description: 'Required: Primary Region',
-                        filterLength: 1,
-                        filterable: false,
-                        name: 'primaryRegion',
-                        script: [
-                            $class: 'GroovyScript',
-                            fallbackScript: [
-                                classpath: [],
-                                sandbox: true,
-                                script: 'return["Could not get Primary Region"]'
-                            ],
-                            script: [
-                                classpath: [],
-                                sandbox: true,
-                                script: """
-                                    return ["${provider.join('","')}"]
-                                """
-                            ]
-                        ]
-                    ],
-                    [$class: 'ChoiceParameter',
-                        choiceType: 'PT_RADIO',
-                        description: 'Optional: Secondary Region',
-                        filterLength: 1,
-                        filterable: false,
-                        name: 'secondaryRegion',
-                        script: [
-                            $class: 'GroovyScript',
-                            fallbackScript: [
-                                classpath: [],
-                                sandbox: true,
-                                script: 'return["Could not get Secondary Region"]'
-                            ],
-                            script: [
-                                classpath: [],
-                                sandbox: true,
-                                script: """
-                                    return ["none:selected","${region.join('","')}"]
-                                """
-                            ]
-                        ]
-                    ]
-                ]
-                
-            )
-
-            cloudParams.each {
-                ky, vl -> println("'${ky}': '${vl}'")
-            }
-        } 
     }
-
 }
