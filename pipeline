@@ -59,10 +59,6 @@ properties([
     ])
 ])
 
-import org.yaml.snakeyaml.Yaml
-import org.yaml.snakeyaml.DumperOptions
-import static org.yaml.snakeyaml.DumperOptions.FlowStyle.BLOCK
-
 pipeline {
     options {
     buildDiscarder(logRotator(numToKeepStr: '3', artifactNumToKeepStr: '3'))
@@ -91,6 +87,9 @@ pipeline {
       stage("Read Manifest Config") {
          steps {
           script {
+            import org.yaml.snakeyaml.Yaml
+            import org.yaml.snakeyaml.DumperOptions
+            import static org.yaml.snakeyaml.DumperOptions.FlowStyle.BLOCK
             def regions = readFile file: "config.yaml"
             echo "regions: " + regions
             
