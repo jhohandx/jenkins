@@ -84,12 +84,13 @@ pipeline {
       stage("Read Manifest Config") {
          steps {
           node {
-            Yaml yaml = new Yaml();
-            InputStream inputStream = this.getClass()
-              .getClassLoader()
-              .getResourceAsStream("config.yaml");
-            Map<String, Object> obj = yaml.load(inputStream);
-            System.out.println(obj);
+            def regions = readYaml file: "config.yaml"
+            echo "regions: " + regions
+            
+            env.awsregions = regions['providers']['aws']['region']
+            env.azregions = regions['providers']['azure']['region']
+            echo {awsregions}
+            echo {azregions}
 	        }
         }
       }
