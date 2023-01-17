@@ -175,67 +175,11 @@ pipeline {
                     ]
                 ]
             ]
-        )      
-   } 
-}
+            
+        )
 
-
-
-        stage('Input Cloud Specific Parameters') {
-            def cloudParams = input(
-                message: 'Please fill out the fields and continue.',
-                parameters: [
-                    string(name: 'provider', description: 'Required: provider', defaultValue: '', trim: true),
-                    string(name: 'region', description: 'Required: region', defaultValue: '', trim: true),
-                    [$class: 'ChoiceParameter',
-                        choiceType: 'PT_RADIO',
-                        description: 'Required: Primary Region',
-                        filterLength: 1,
-                        filterable: false,
-                        name: 'primaryRegion',
-                        script: [
-                            $class: 'GroovyScript',
-                            fallbackScript: [
-                                classpath: [],
-                                sandbox: true,
-                                script: 'return["Could not get Primary Region"]'
-                            ],
-                            script: [
-                                classpath: [],
-                                sandbox: true,
-                                script: """
-                                    return ["${provider.join('","')}"]
-                                """
-                            ]
-                        ]
-                    ],
-                    [$class: 'ChoiceParameter',
-                        choiceType: 'PT_RADIO',
-                        description: 'Optional: Secondary Region',
-                        filterLength: 1,
-                        filterable: false,
-                        name: 'secondaryRegion',
-                        script: [
-                            $class: 'GroovyScript',
-                            fallbackScript: [
-                                classpath: [],
-                                sandbox: true,
-                                script: 'return["Could not get Secondary Region"]'
-                            ],
-                            script: [
-                                classpath: [],
-                                sandbox: true,
-                                script: """
-                                    return ["none:selected","${region.join('","')}"]
-                                """
-                            ]
-                        ]
-                    ]
-                ]
-                
-            )
-
-            cloudParams.each {
-                ky, vl -> println("'${ky}': '${vl}'")
-            }
+        cloudParams.each {
+            ky, vl -> println("'${ky}': '${vl}'")
         }
+    } 
+}
