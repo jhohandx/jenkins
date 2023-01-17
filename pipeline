@@ -63,7 +63,7 @@ import org.yaml.snakeyaml.Yaml
 
 pipeline {
     options {
-    buildDiscarder(logRotator(numToKeepStr: '3', artifactNumToKeepStr: '3'))
+    buildDiscarder(logRotator(numToKeepStr: '1', artifactNumToKeepStr: '1'))
   }
   environment {
          vari = ""
