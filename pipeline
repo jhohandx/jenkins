@@ -87,6 +87,7 @@ pipeline {
         }
       }
       stage("Read Manifest Config") {
+        steps
          steps {
           script {
             def regions = readFile file: "config.yaml"
@@ -99,7 +100,7 @@ pipeline {
             List groups = []
             List host = []
             Yaml parser = new Yaml()
-            def example = parser.load(("/Users/jhohandx/Documents/work/repos/personal/config.yaml" as File).text)
+            def example = parser.load(("config.yaml" as File).text)
 
             for(anf in example.keySet()){
                 // print(anf)
