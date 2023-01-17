@@ -231,40 +231,10 @@ pipeline {
                             ]
                         ]
                     ]
-                    ]
-                    // [$class: 'DynamicReferenceParameter',
-                    //     choiceType: 'ET_FORMATTED_HTML',
-                    //     description: 'Required: Zones of the subnets.',
-                    //     name: 'subnetZones',
-                    //     referencedParameters: 'subnetNum',
-                    //     omitValueField: true,
-                    //     script: [
-                    //         $class: 'GroovyScript',
-                    //         fallbackScript: [
-                    //             classpath: [],
-                    //             sandbox: true,
-                    //             script: "return 'Could not get number of subnets'"
-                    //         ],
-                    //         script: [
-                    //             classpath: [],
-                    //             sandbox: true,
-                    //             script: """
-                    //                 subnets = Integer.parseInt(subnetNum)
-                    //                 if (subnets > 0) {
-                    //                     html = ""
-                    //                     for (int i = 0; i < subnets; i++) {
-                    //                         html += "Subnet \${i+1}: <input class='setting-input' type='text' name='value' size='100'  style='width:100%' maxlength='64' value=''/>"
-                    //                     }
-                    //                 } else {
-                    //                     html = ""
-                    //                 }
-                    //                 return html
-                    //                 """
-                    //         ]
-                    //     ]
-                    // ]
                 ]
+                
             )
+
             cloudParams.each {
                 ky, vl -> println("'${ky}': '${vl}'")
             }
