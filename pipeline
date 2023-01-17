@@ -79,5 +79,18 @@ pipeline {
           echo "Crossed param validation"
         } }
       }
+stage("Read Manifest Config") {
+	node {
+		def regions = readYaml file: "config.yaml"
+		echo "regions: " + regions
+		
+		env.awsregions = regions['providers']['aws']['region']
+		env.azregions = regions['providers']['azure']['region']
+    echo {awsregions}
+    echo {azregions}
+
+    
+	}
+}
   }
 }
