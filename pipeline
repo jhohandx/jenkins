@@ -86,6 +86,11 @@ pipeline {
           }
         }
       }
+      stage("List Files") {
+         steps {
+          script {sh 'ls'}
+         }
+      }
       stage("Read Manifest Config") {
          steps {
           script {
