@@ -88,7 +88,10 @@ pipeline {
       }
       stage("List Files") {
          steps {
-          script {sh 'ls'}
+          script {
+            sh 'ls'
+            sh 'pwd'
+          }
          }
       }
       stage("Read Manifest Config") {
@@ -104,7 +107,7 @@ pipeline {
             List groups = []
             List host = []
             Yaml parser = new Yaml()
-            def example = parser.load(("config.yaml" as File).text)
+            def example = parser.load((${env.WORKSPACE}"config.yaml" as File).text)
 
             for(anf in example.keySet()){
                 // print(anf)
