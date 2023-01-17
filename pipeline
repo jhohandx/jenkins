@@ -104,6 +104,7 @@ pipeline {
             // env.azregions = regions['providers']['azure']['region']
             // echo {awsregions}
             // echo {azregions}
+
             List provider = []
             List region = []
             List az = []
@@ -121,8 +122,36 @@ pipeline {
 
             println(provider)
             println(region)
+            properties([
+              parameters([
+                  choice(
+                      choices: {provider}, 
+                      name: 'PROVIDER'
+                  ),
+                  booleanParam(
+                      defaultValue: true, 
+                      description: '', 
+                      name: 'BOOLEAN'
+                  ),
+                  text(
+                      defaultValue: '''
+                      this is a multi-line 
+                      string parameter example
+                      ''', 
+                        name: 'MULTI-LINE-STRING'
+                  ),
+                  string(
+                      defaultValue: 'scriptcrunch', 
+                      name: 'STRING-PARAMETER', 
+                      trim: true
+                  )
+                ])            
+            ])
 	        }
         }
       }
   }
 }
+
+
+
