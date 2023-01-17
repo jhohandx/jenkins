@@ -60,9 +60,6 @@ properties([
     ])
 ])
 
-
-buildDiscarder(logRotator(daysToKeepStr: '3', numToKeepStr: '3')
-
 import org.yaml.snakeyaml.Yaml
 import org.yaml.snakeyaml.DumperOptions
 import static org.yaml.snakeyaml.DumperOptions.FlowStyle.BLOCK
