@@ -13,13 +13,13 @@ properties([
                     classpath: [], 
                     sandbox: false, 
                     script: 
-                        'return[\'Could not get Env\']'
+                        'return[\'Could not get Environment\']'
                 ], 
                 script: [
                     classpath: [], 
                     sandbox: false, 
                     script: 
-                        'return["Dev","QA","Stage","Prod"]'
+                        'return["DEV","QA","PRD"]'
                 ]
             ]
         ], 
@@ -43,17 +43,14 @@ properties([
                     classpath: [], 
                     sandbox: false, 
                     script: 
-                        ''' if (Env.equals("Dev")){
-                                return["devaaa001","devaaa002","devbbb001","devbbb002","devccc001","devccc002"]
+                        ''' if (Env.equals("DEV")){
+                                return["DEV1","DEV2","DEV3"]
                             }
                             else if(Env.equals("QA")){
-                                return["qaaaa001","qabbb002","qaccc003"]
+                                return["QA1","QA2","QA3"]
                             }
-                            else if(Env.equals("Stage")){
-                                return["staaa001","stbbb002","stccc003"]
-                            }
-                            else if(Env.equals("Prod")){
-                                return["praaa001","prbbb002","prccc003"]
+                            else if(Env.equals("PRD")){
+                                return["PRD1","PRD2","PRD3"]
                             }
                         '''
                 ]
