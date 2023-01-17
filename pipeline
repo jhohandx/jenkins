@@ -59,11 +59,6 @@ properties([
     ])
 ])
 
-@Grab('org.yaml:snakeyaml:1.17')
-import org.yaml.snakeyaml.Yaml
-import org.yaml.snakeyaml.DumperOptions
-import static org.yaml.snakeyaml.DumperOptions.FlowStyle.BLOCK
-
 pipeline {
   environment {
          vari = ""
@@ -89,13 +84,12 @@ pipeline {
       stage("Read Manifest Config") {
          steps {
           node {
-            def regions = readYaml file: "config.yaml"
-            echo "regions: " + regions
-            
-            env.awsregions = regions['providers']['aws']['region']
-            env.azregions = regions['providers']['azure']['region']
-            echo {awsregions}
-            echo {azregions}
+            Yaml yaml = new Yaml();
+            InputStream inputStream = this.getClass()
+              .getClassLoader()
+              .getResourceAsStream("config.yaml");
+            Map<String, Object> obj = yaml.load(inputStream);
+            System.out.println(obj);
 	        }
         }
       }
