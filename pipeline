@@ -106,6 +106,7 @@ pipeline {
             // echo {azregions}
             List provider = []
             List region = []
+            List az = []
             Yaml parser = new Yaml()
             def example = parser.load(("/var/jenkins_home/workspace/github_main/config.yaml" as File).text)
 
@@ -118,7 +119,7 @@ pipeline {
             }
 
             for(inf in example.providers.aws.region.ap-south-1.keySet()){
-                region.add(inf)  
+                az.add(inf)  
             }
 
             println(provider)
