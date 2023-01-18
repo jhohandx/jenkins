@@ -2,7 +2,7 @@ import org.yaml.snakeyaml.Yaml
 List regionaws = []
 List regionazure = []
 Yaml parser = new Yaml()
-def yaml = parser.load(("/var/jenkins_home/workspace/github_main/config.yaml" as File).text)
+def yaml = parser.load(("/var/jenkins_home/workspace/activeChoiceParameter_main/config.yaml" as File).text)
 
 for(inf in yaml.providers.aws.region.keySet()){
   regionaws.add(inf)  
