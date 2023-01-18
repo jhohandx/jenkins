@@ -49,7 +49,7 @@ node('node') {
             // List region = []
             // List az = []
             // Yaml parser = new Yaml()
-            // def yaml = parser.load(("/var/jenkins_home/workspace/github_main/config.yaml" as File).text)
+            // def yaml = parser.load(("/var/jenkins_home/workspace/ScriptlerScriptPipeline_main" as File).text)
 
             // for(inf in yaml.providers.keySet()){
             //     provider.add(inf)  
