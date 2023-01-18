@@ -1,0 +1,12 @@
+import org.yaml.snakeyaml.Yaml
+List provider = []
+List region = []
+List az = []
+Yaml parser = new Yaml()
+def yaml = parser.load(("/var/jenkins_home/workspace/github_main/config.yaml" as File).text)
+
+for(inf in yaml.providers.keySet()){
+  provider.add(inf)  
+}
+
+return(provider)
