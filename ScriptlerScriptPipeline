@@ -1,0 +1,68 @@
+properties([
+  parameters([
+    [
+      $class: 'ChoiceParameter', 
+      choiceType: 'PT_SINGLE_SELECT', 
+      name: 'provider', 
+      script: [
+        $class: 'ScriptlerScript', 
+        scriptlerScriptId:'provider.groovy',
+      ]
+    ],
+    [
+      $class: 'CascadeChoiceParameter',
+      choiceType: 'PT_SINGLE_SELECT',
+      name: 'region', 
+      script: [
+        $class: 'ScriptlerScript',
+        scriptlerScriptId:'region.groovy',
+        referencedParameters: 'provider',
+        parameters: [
+          [name:'_pprovider', value: '$provider']
+        ]
+      ]
+    ]
+  ])
+])
+
+import org.yaml.snakeyaml.Yaml
+
+node('node') {
+    try {
+        stage ("Basic Form") {
+                    echo 'Hello'
+                    echo "${params.provider}"
+                    echo "${params.region}"
+                    if (params.provider.equals("Could not get provider from Env Param")) {
+                        echo "Must be the first build after Pipeline deployment.  Aborting the build"
+                        currentBuild.result = 'ABORTED'
+                        return
+                    }
+                    echo "Crossed param validation"
+        }
+        stage("List Files") {
+            sh 'ls'
+            sh 'pwd' 
+        }
+        stage("parse yaml") {
+            // List provider = []
+            // List region = []
+            // List az = []
+            // Yaml parser = new Yaml()
+            // def yaml = parser.load(("/var/jenkins_home/workspace/github_main/config.yaml" as File).text)
+
+            // for(inf in yaml.providers.keySet()){
+            //     provider.add(inf)  
+            // }
+
+            // for(inf in yaml.providers.aws.region.keySet()){
+            //     region.add(inf)  
+            // }
+            println(provider)
+            println(region)
+
+        }
+    } catch (e) {
+        println(e)
+    }
+}
