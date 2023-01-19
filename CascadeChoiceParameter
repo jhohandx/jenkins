@@ -1,0 +1,53 @@
+def providers() {
+   return ["aws","azure"]
+}
+
+def prov=providers()
+
+properties(
+    [
+        parameters(
+            [
+                choice(name: 'provider', choices: providers(), description: 'The cloud provider to set up the network in.'),
+                [$class: 'CascadeChoiceParameter',
+                    choiceType: 'PT_RADIO',
+                    description: 'Required: The environment to create the network for. (Only used for resource tags)',
+                    filterLength: 1,
+                    filterable: false,
+                    name: 'region',
+                    randomName: 'choice-parameter-399188539163000',
+                    referencedParameters: 'provider',
+                    script: [
+                        $class: 'GroovyScript',
+                        fallbackScript: [
+                            classpath: [],
+                            sandbox: true,
+                            script: 'return["Could not get Environment Names"]'
+                        ],
+                        script: [
+                            classpath: [],
+                            sandbox: true,
+                            script: '''if (provider == "aws"){
+                                        return["awsregion1", "awsregion2"]
+                                    }else{
+                                        return["azureregion1","azureregion2"]
+                                    }'''
+                        ]
+                    ]
+                ]
+            ]
+        )
+    ]  
+)    
+node {
+    stage('print vars') {
+           prov = providers()
+           echo "Providers ${prov}"
+           
+           prov = providers()
+           echo "Providers ${region}"
+    }
+    stage('using vars') {
+    
+    }
+}
