@@ -1,5 +1,28 @@
+def getfunction(url){
+   // GET
+   def get = new URL("${url}").openConnection();
+   def getRC = get.getResponseCode();
+       if(getRC.equals(200)) {
+           return(get.getInputStream().getText());
+       }
+}
+
+def postfunction(url,json){
+    // POST
+    def post = new URL("${url}").openConnection();
+    def message = "${json}"
+    post.setRequestMethod("POST")
+    post.setDoOutput(true)
+    post.setRequestProperty("Content-Type", "application/json")
+    post.getOutputStream().write(message.getBytes("UTF-8"));
+    def postRC = post.getResponseCode();
+    if(postRC.equals(200)) {
+        return(post.getInputStream().getText());
+    }
+}
+
 def providers() {
-   return ["aws","azure"]
+    return ["aws","azure"]
 }
 
 def prov=providers()
@@ -71,6 +94,13 @@ node {
            echo "providers ${provider}"
            echo "region ${region}"
            echo "az ${az}"
+
+           def get = getfunction("https://httpbin.org/get")
+           echo "get ${get}"
+
+           def post = postfunction("https://httpbin.org/post",'{"message":"this is a message"}')
+           echo "post ${post}"
+
     }
     stage('using vars') {
     
