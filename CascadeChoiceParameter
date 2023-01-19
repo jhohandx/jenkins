@@ -34,6 +34,32 @@ properties(
                                     }'''
                         ]
                     ]
+                ],
+                [$class: 'CascadeChoiceParameter',
+                    choiceType: 'PT_RADIO',
+                    description: 'Required: The environment to create the network for. (Only used for resource tags)',
+                    filterLength: 1,
+                    filterable: false,
+                    name: 'az',
+                    randomName: 'choice-parameter-399188539163001',
+                    referencedParameters: 'provider',
+                    script: [
+                        $class: 'GroovyScript',
+                        fallbackScript: [
+                            classpath: [],
+                            sandbox: true,
+                            script: 'return["Could not get Environment Names"]'
+                        ],
+                        script: [
+                            classpath: [],
+                            sandbox: true,
+                            script: '''if (provider == "aws"){
+                                        return["a", "b", "c"]
+                                    }else{
+                                        return["a","b"]
+                                    }'''
+                        ]
+                    ]
                 ]
             ]
         )
@@ -42,10 +68,9 @@ properties(
 node {
     stage('print vars') {
            prov = providers()
-           echo "Providers ${prov}"
-           
-           prov = providers()
-           echo "Providers ${region}"
+           echo "providers ${provider}"
+           echo "region ${region}"
+           echo "az ${az}"
     }
     stage('using vars') {
     
