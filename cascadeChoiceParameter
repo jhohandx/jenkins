@@ -98,11 +98,11 @@ node {
            echo "region ${region}"
            echo "az ${az}"
 
-           def get = getfunction("https://httpbin.org/get")
-           echo "get ${get}"
+        //    def get = getfunction("https://httpbin.org/get")
+        //    echo "get ${get}"
 
-           def post = postfunction("https://httpbin.org/post",'{"message":"this is a message"}')
-           echo "post ${post}"
+        //    def post = postfunction("https://httpbin.org/post",'{"message":"this is a message"}')
+        //    echo "post ${post}"
 
     }
     stage('using vars') {
