@@ -27,6 +27,9 @@ def providers() {
 
 def prov=providers()
 
+properties([
+    buildDiscarder(logRotator(daysToKeepStr: '3', numToKeepStr: '3')),
+])
 properties(
     [
         parameters(
@@ -83,17 +86,7 @@ properties(
                                     }'''
                         ]
                     ]
-                ],
-                [$class: 'BuildDiscarderProperty', 
-                strategy: 
-                    [
-                        $class: 'LogRotator', 
-                        artifactDaysToKeepStr: '', 
-                        artifactNumToKeepStr: '', 
-                        daysToKeepStr: '2', 
-                        numToKeepStr: '2'
-                    ]
-                ]                
+                ]
             ]
         )
     ]  
